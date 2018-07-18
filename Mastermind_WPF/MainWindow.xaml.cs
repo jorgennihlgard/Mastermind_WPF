@@ -20,9 +20,14 @@ namespace Mastermind_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        
         public MainWindow()
         {
             InitializeComponent();
+
+            DataContext = Color.GetColors();
         }
+
+       
     }
 }

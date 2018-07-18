@@ -6,7 +6,15 @@
         xmlns:local="clr-namespace:Mastermind_WPF"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <Canvas>
+        <Ellipse Canvas.Top="30" Canvas.Left="20"  Width="30" Height="30" Name="RedPick" Fill="Red"  />
+        <Ellipse Canvas.Top="70" Canvas.Left="20" Width="30" Height="30" Name="GreenPick" Fill="Green"/>
+        <Ellipse Canvas.Top="110" Canvas.Left="20" Width="30" Height="30" Name="BluePick" Fill="Blue"/>
+        <Ellipse Canvas.Top="150" Canvas.Left="20" Width="30" Height="30" Name="YellowPick" Fill="Yellow"/>
+        <Rectangle Canvas.Top="50" Canvas.Left="150"  Width="180" Height="300" Name="Board" Fill="Brown"/>
+        <Line X1="280" Y1="50" X2="280" Y2="350" Stroke="Black" StrokeThickness="1"/>
+
+
+
+    </Canvas>
 </Window>
