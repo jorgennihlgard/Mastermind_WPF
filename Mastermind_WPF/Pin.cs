@@ -15,13 +15,9 @@ namespace Mastermind_WPF
         //public Cooolor Color { get; set; }
         public Point Point { get; set; }
         public bool PlayerPin { get; set; }
-        public Ellipse Ellipse { get; set; }
+        
 
-        public Pin()
-        {
-            Ellipse = new Ellipse();
-            
-        }
+        
 
       
 

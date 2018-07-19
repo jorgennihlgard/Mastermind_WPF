@@ -16,11 +16,11 @@ namespace Mastermind_WPF
         }
 
         public DbSet<Board> Boards { get; set; }
-        public DbSet<Cooolor> Colors { get; set; }
         public DbSet<Pin> Pins { get; set; }
-        public DbSet<Row> Rows { get; set; }
-        public DbSet<Point> Points { get; set; }
-        public DbSet<Ellipse> Ellipses { get; set; }
+     
+     
+
+       
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -22,7 +22,7 @@ namespace Mastermind_WPF
     public partial class MainWindow : Window
     {
         Model1 db = new Model1();
-       
+        static readonly Random Random = new Random();
         public MainWindow()
         {
             InitializeComponent();
@@ -30,6 +30,8 @@ namespace Mastermind_WPF
             {
                 Ellipse pin = CreateCode();
                 MyCanvas.Children.Add(pin);
+               // db.Ellipses.Add(pin);
+                //db.SaveChanges();
             }
 
         }
@@ -99,65 +101,91 @@ namespace Mastermind_WPF
             Canvas.SetTop(pin, 60);
             int x = Point.GetCodePosition();
             Canvas.SetLeft(pin, x);
-            pin.Fill = new SolidColorBrush(Colors.Aqua);
+            string color = GetRandomColor();
+            SolidColorBrush pinColor = (SolidColorBrush) new BrushConverter().ConvertFromString(color);
+            pin.Fill = pinColor;
             return pin;
+        }
 
 
-
-
-
-
-
-            Random random = new Random();
+        public static string GetRandomColor()
+        {
+            
 
 
             string[] colors = { "Red", "Green", "Blue", "Yellow", "HotPink", "AquaMarine" };
 
+            int randomNr = Random.Next(0, 6);
 
-            string[] randomColours = new string[6];
+            string color = colors[randomNr];
 
-            for (int i = 0; i < colors.Length; i++)
-            {
-                int randomNr = random.Next(0, 6);
+            return color;
 
-
-
-                randomColours[i] = colors[randomNr];
-
-            }
         }
 
-    //    public void 
-    //    {
-    //        SolidColorBrush ddd = new SolidColorBrush(Colors.Red);
-    //    SolidColorBrush ddd = new SolidColorBrush(Colors.Green);
-    //    SolidColorBrush ddd = new SolidColorBrush(Colors.Blue);
-    //    SolidColorBrush ddd = new SolidColorBrush(Colors.Yellow);
+        public static void CorrectRow()
+        {
 
-    //    Random random = new Random();
-
-
-    //    string[] colors = { "Red", "Green", "Blue", "Yellow", "HotPink", "AquaMarine" };
-
-
-    //    string[] randomColours = new string[6];
-            
-    //        for (int i = 0; i<colors.Length; i++)
-    //        {
-    //            int randomNr = random.Next(0, 6);
-
-
-
-    //    randomColours[i] = colors[randomNr];
-
-    //        }
-
-    //SolidColorBrush redBrush = (SolidColorBrush)new BrushConverter().ConvertFromString(randomColours[1]);
-    //SolidColorBrush redB = (SolidColorBrush)new BrushConverter().ConvertFromString("Red");
-    //SolidColorBrush redBrus = (SolidColorBrush)new BrushConverter().ConvertFromString("Red");
-    //Ellipse pin = CreatePin();
-    //pin.Fill = redBrus;
-    //        MyCanvas.Children.Add(pin);
-    //    }
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//    public void 
+//    {
+//        SolidColorBrush ddd = new SolidColorBrush(Colors.Red);
+//    SolidColorBrush ddd = new SolidColorBrush(Colors.Green);
+//    SolidColorBrush ddd = new SolidColorBrush(Colors.Blue);
+//    SolidColorBrush ddd = new SolidColorBrush(Colors.Yellow);
+
+//    Random random = new Random();
+
+
+//    string[] colors = { "Red", "Green", "Blue", "Yellow", "HotPink", "AquaMarine" };
+
+
+//    string[] randomColours = new string[6];
+
+//        for (int i = 0; i<colors.Length; i++)
+//        {
+//            int randomNr = random.Next(0, 6);
+
+
+
+//    randomColours[i] = colors[randomNr];
+
+//        }
+
+//SolidColorBrush redBrush = (SolidColorBrush)new BrushConverter().ConvertFromString(randomColours[1]);
+//SolidColorBrush redB = (SolidColorBrush)new BrushConverter().ConvertFromString("Red");
+//SolidColorBrush redBrus = (SolidColorBrush)new BrushConverter().ConvertFromString("Red");
+//Ellipse pin = CreatePin();
+//pin.Fill = redBrus;
+//        MyCanvas.Children.Add(pin);
+//    }
+

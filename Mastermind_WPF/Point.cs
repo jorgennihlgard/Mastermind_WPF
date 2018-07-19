@@ -10,6 +10,7 @@ namespace Mastermind_WPF
 {
     public class Point
     {
+        
         private static int _yPosition = 370;
         private static int _xPosition = 130;
        

@@ -63,8 +63,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Migrations\201807191548150_pinsWorking.cs" />
+    <Compile Include="Migrations\201807191548150_pinsWorking.Designer.cs">
+      <DependentUpon>201807191548150_pinsWorking.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807191636377_pinsWorkingAgain.cs" />
+    <Compile Include="Migrations\201807191636377_pinsWorkingAgain.Designer.cs">
+      <DependentUpon>201807191636377_pinsWorkingAgain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Point.cs" />
-    <Compile Include="Row.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -74,7 +81,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Board.cs" />
-    <Compile Include="Cooolor.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -118,6 +124,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807181257572_bb.resx">
       <DependentUpon>201807181257572_bb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807191548150_pinsWorking.resx">
+      <DependentUpon>201807191548150_pinsWorking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807191636377_pinsWorkingAgain.resx">
+      <DependentUpon>201807191636377_pinsWorkingAgain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
