@@ -3,8 +3,9 @@
    public class Board
     {
         public int Id { get; set; }
-        public int Row { get; set; }
+        public Point Point { get; set; }
         public Pin Pin { get; set; }
+
 
 
     }

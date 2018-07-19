@@ -6,13 +6,17 @@
         xmlns:local="clr-namespace:Mastermind_WPF"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Canvas>
-        <Ellipse Canvas.Top="30" Canvas.Left="20"  Width="30" Height="30" Name="RedPick" Fill="Red"  />
-        <Ellipse Canvas.Top="70" Canvas.Left="20" Width="30" Height="30" Name="GreenPick" Fill="Green"/>
-        <Ellipse Canvas.Top="110" Canvas.Left="20" Width="30" Height="30" Name="BluePick" Fill="Blue"/>
-        <Ellipse Canvas.Top="150" Canvas.Left="20" Width="30" Height="30" Name="YellowPick" Fill="Yellow"/>
-        <Rectangle Canvas.Top="50" Canvas.Left="150"  Width="180" Height="300" Name="Board" Fill="Brown"/>
-        <Line X1="280" Y1="50" X2="280" Y2="350" Stroke="Black" StrokeThickness="1"/>
+    <Canvas Name="MyCanvas">
+        <Rectangle Canvas.Top="50" Canvas.Left="150"  Width="180" Height="350" Name="Board" Fill="Brown"/>
+        <Line X1="280" Y1="50" X2="280" Y2="400" Stroke="Black" StrokeThickness="1"/>
+        <Ellipse Canvas.Top="30" Canvas.Left="20"  Width="30" Height="30" Name="RedPick" Fill="Red" MouseLeftButtonDown="RedPick_MouseLeftButtonDown" RenderTransformOrigin="0.473,0.567"  />
+        <Ellipse Canvas.Top="70" Canvas.Left="20" Width="30" Height="30" Name="GreenPick" Fill="Green" MouseLeftButtonDown="GreenPick_MouseLeftButtonDown"/>
+        <Ellipse Canvas.Top="110" Canvas.Left="20" Width="30" Height="30" Name="BluePick" Fill="Blue" MouseLeftButtonDown="BluePick_MouseLeftButtonDown"/>
+        <Ellipse Canvas.Top="150" Canvas.Left="20" Width="30" Height="30" Name="YellowPick" Fill="Yellow" MouseLeftButtonDown="YellowPick_MouseLeftButtonDown"/>
+        <Ellipse Canvas.Top="190" Canvas.Left="20" Width="30" Height="30" Name="PinkPick" Fill="HotPink" MouseLeftButtonDown="PinkPick_MouseLeftButtonDown"/>
+        <Ellipse Canvas.Top="230" Canvas.Left="20" Width="30" Height="30" Name="AquamarinePick" Fill="Aquamarine" MouseLeftButtonDown="AquamarinePick_MouseLeftButtonDown"/>
+
+
 
 
 
