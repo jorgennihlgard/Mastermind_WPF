@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Runtime.Remoting.Channels;
 using System.Text;
@@ -21,18 +22,30 @@ namespace Mastermind_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Pin pinne = null;
+        
         Model1 db = new Model1();
         static readonly Random Random = new Random();
         public MainWindow()
         {
+            
             InitializeComponent();
+
+           DataSet circle = MakeDataTable();
+            Ellipse pin = null;
             for (int i = 0; i < 4; i++)
             {
-                Ellipse pin = CreateCode();
+                pin = CreateCode();
+              
+                AddTableRows(circle, pin);
                 MyCanvas.Children.Add(pin);
-               // db.Ellipses.Add(pin);
-                //db.SaveChanges();
+
+               
+               
+
+                
             }
+            Save(circle);
 
         }
 
@@ -42,7 +55,7 @@ namespace Mastermind_WPF
             Ellipse pin = CreatePin();
             pin.Fill = new SolidColorBrush(Colors.Red);
             MyCanvas.Children.Add(pin);
-
+            
         }
 
         private void GreenPick_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -127,6 +140,72 @@ namespace Mastermind_WPF
         {
 
         }
+
+        public static DataSet MakeDataTable()
+        {
+            DataSet game = new DataSet("MyGameTables");
+            DataTable circle = game.Tables.Add("MyPins");
+            DataTable peg = game.Tables.Add("MyPegs");
+
+            circle.Columns.Add("Id", typeof(int));
+            circle.Columns.Add("Color", typeof(string));
+            circle.Columns.Add("YPos");
+            circle.Columns.Add("XPos");
+            peg.Columns.Add("Id", typeof(int));
+            peg.Columns.Add("aa", typeof(string));
+            peg.Columns.Add("bbb");
+            peg.Columns.Add("cccc");
+
+            return game;
+
+            
+        }
+
+        public static void AddTableRows( DataSet cir, Ellipse pin)
+        {
+           
+            DataRow row = cir.Tables[0].NewRow();
+            DataRow pegrow = cir.Tables[1].NewRow();
+            row["Id"] = 1;
+            row["Color"] = pin.Fill;
+            row["YPos"] = pin.GetValue(Canvas.TopProperty);
+            row["XPos"] = pin.GetValue(Canvas.LeftProperty);
+            pegrow["Id"] = 1;
+            pegrow["aa"] = pin.Fill;
+            pegrow["bbb"] = pin.GetValue(Canvas.TopProperty);
+            pegrow["cccc"] = pin.GetValue(Canvas.LeftProperty);
+            cir.Tables[0].Rows.Add(row);
+            cir.Tables[1].Rows.Add(pegrow);
+
+
+
+            // Pin newPin = new Pin();
+
+            //newPin.Id += Convert.ToInt32(row["Id"]);
+            //newPin.Color += row["Color"].ToString();
+            //newPin.YPos += Convert.ToInt32(row["YPos"]);
+            //newPin.XPos += Convert.ToInt32(row["XPos"]);
+            //MessageBox.Show(thisRow["Color"] + " " + thisRow["Id"] + " " + thisRow["YPos"] + " " + thisRow["xPos"]);
+
+
+            // return newPin;
+
+
+
+        }
+
+        public void Save(DataSet pin)
+        {
+            foreach (DataColumn  dd in pin.Tables["0"].Columns)
+            {
+                
+            }
+
+            pinss.Color = pin.Tables["0"].Columns.
+            db.Pins.Add((Pin)pin.Tables["0"]);       //HÄR ÄR JAG........................
+            db.SaveChanges();
+        }
+
     }
 }
 

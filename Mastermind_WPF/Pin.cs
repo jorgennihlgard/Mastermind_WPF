@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,9 +12,12 @@ namespace Mastermind_WPF
 {
    public class Pin
     {
+        [Key]
         public int Id { get; set; }
-        //public Cooolor Color { get; set; }
-        public Point Point { get; set; }
+        public string Color { get; set; }
+        public int YPos { get; set; }
+        public int XPos { get; set; }
+
         public bool PlayerPin { get; set; }
         
 
