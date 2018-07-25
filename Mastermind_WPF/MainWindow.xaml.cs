@@ -23,29 +23,35 @@ namespace Mastermind_WPF
     public partial class MainWindow : Window
     {
         private Pin pinne = null;
+        List<Ellipse> CodePins = new List<Ellipse>();
+        List<Ellipse> GuessPins = new List<Ellipse>();
         
+
+        string[] correctColour = new string[4];
+        static int pinCount = 0;
         Model1 db = new Model1();
         static readonly Random Random = new Random();
         public MainWindow()
         {
-            
+
             InitializeComponent();
 
-           DataSet circle = MakeDataTable();
+            //DataSet circle = MakeDataTable();
             Ellipse pin = null;
+
             for (int i = 0; i < 4; i++)
             {
                 pin = CreateCode();
-              
-                AddTableRows(circle, pin);
+
+                correctColour[i] = pin.Fill.ToString();
+                CodePins.Add(pin);
+
+                //AddTableRows(circle, pin);
                 MyCanvas.Children.Add(pin);
 
-               
-               
-
-                
             }
-            Save(circle);
+
+            //Save(circle);
 
         }
 
@@ -54,43 +60,71 @@ namespace Mastermind_WPF
 
             Ellipse pin = CreatePin();
             pin.Fill = new SolidColorBrush(Colors.Red);
-            MyCanvas.Children.Add(pin);
-            
+            //MyCanvas.Children.Add(pin);
+            //GuessPins.Add(pin);
+            checkNumberPinsInRow(pin);
         }
 
         private void GreenPick_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Ellipse pin = CreatePin();
             pin.Fill = new SolidColorBrush(Colors.Green);
-            MyCanvas.Children.Add(pin);
+            //MyCanvas.Children.Add(pin);
+            //GuessPins.Add(pin);
+            checkNumberPinsInRow(pin);
         }
 
         private void BluePick_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Ellipse pin = CreatePin();
             pin.Fill = new SolidColorBrush(Colors.Blue);
-            MyCanvas.Children.Add(pin);
+            //MyCanvas.Children.Add(pin);
+            //GuessPins.Add(pin);
+            checkNumberPinsInRow(pin);
         }
 
         private void YellowPick_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Ellipse pin = CreatePin();
             pin.Fill = new SolidColorBrush(Colors.Yellow);
+            checkNumberPinsInRow(pin);
+           
+
+        }
+
+        public void checkNumberPinsInRow(Ellipse pin)
+        {
             MyCanvas.Children.Add(pin);
+            GuessPins.Add(pin);
+            if (pinCount % 4 == 0)
+            {
+                List<Ellipse> smallPins = SmallPin.CalculateSmallPins(GuessPins, CodePins);
+                foreach (var item in smallPins)
+                {
+                    MyCanvas.Children.Add(item);
+                }
+
+            }
+            
         }
 
         private void PinkPick_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Ellipse pin = CreatePin();
             pin.Fill = new SolidColorBrush(Colors.HotPink);
-            MyCanvas.Children.Add(pin);
+            //MyCanvas.Children.Add(pin);
+            //GuessPins.Add(pin);
+            checkNumberPinsInRow(pin);
         }
 
         private void AquamarinePick_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Ellipse pin = CreatePin();
             pin.Fill = new SolidColorBrush(Colors.Aquamarine);
-            MyCanvas.Children.Add(pin);
+            //MyCanvas.Children.Add(pin);
+            //GuessPins.Add(pin);
+            checkNumberPinsInRow(pin);
+            
         }
 
         public static Ellipse CreatePin()
@@ -102,7 +136,7 @@ namespace Mastermind_WPF
             Canvas.SetTop(pin, y);
             int x = Point.GetXPosition();
             Canvas.SetLeft(pin, x);
-
+            pinCount++;
             return pin;
 
         }
@@ -115,7 +149,7 @@ namespace Mastermind_WPF
             int x = Point.GetCodePosition();
             Canvas.SetLeft(pin, x);
             string color = GetRandomColor();
-            SolidColorBrush pinColor = (SolidColorBrush) new BrushConverter().ConvertFromString(color);
+            SolidColorBrush pinColor = (SolidColorBrush)new BrushConverter().ConvertFromString(color);
             pin.Fill = pinColor;
             return pin;
         }
@@ -123,8 +157,6 @@ namespace Mastermind_WPF
 
         public static string GetRandomColor()
         {
-            
-
 
             string[] colors = { "Red", "Green", "Blue", "Yellow", "HotPink", "AquaMarine" };
 
@@ -158,12 +190,12 @@ namespace Mastermind_WPF
 
             return game;
 
-            
+
         }
 
-        public static void AddTableRows( DataSet cir, Ellipse pin)
+        public static void AddTableRows(DataSet cir, Ellipse pin)
         {
-           
+
             DataRow row = cir.Tables[0].NewRow();
             DataRow pegrow = cir.Tables[1].NewRow();
             row["Id"] = 1;
@@ -174,6 +206,7 @@ namespace Mastermind_WPF
             pegrow["aa"] = pin.Fill;
             pegrow["bbb"] = pin.GetValue(Canvas.TopProperty);
             pegrow["cccc"] = pin.GetValue(Canvas.LeftProperty);
+
             cir.Tables[0].Rows.Add(row);
             cir.Tables[1].Rows.Add(pegrow);
 
@@ -196,14 +229,14 @@ namespace Mastermind_WPF
 
         public void Save(DataSet pin)
         {
-            foreach (DataColumn  dd in pin.Tables["0"].Columns)
-            {
-                
-            }
+            //    foreach (DataColumn dd in pin.Tables["0"].Columns)
+            //    {
+            //        dd.
+            //    }
 
-            pinss.Color = pin.Tables["0"].Columns.
-            db.Pins.Add((Pin)pin.Tables["0"]);       //HÄR ÄR JAG........................
-            db.SaveChanges();
+            //    pinss.Color = pin.Tables["0"];
+            //    db.Pins.Add(pin.Tables["0"]);       //HÄR ÄR JAG........................
+            //    db.SaveChanges();
         }
 
     }

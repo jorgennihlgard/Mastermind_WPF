@@ -13,6 +13,21 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -63,19 +78,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Migrations\201807191548150_pinsWorking.cs" />
-    <Compile Include="Migrations\201807191548150_pinsWorking.Designer.cs">
-      <DependentUpon>201807191548150_pinsWorking.cs</DependentUpon>
+    <Compile Include="Migrations\201807240737497_myFirstOnModel3.cs" />
+    <Compile Include="Migrations\201807240737497_myFirstOnModel3.Designer.cs">
+      <DependentUpon>201807240737497_myFirstOnModel3.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201807191636377_pinsWorkingAgain.cs" />
-    <Compile Include="Migrations\201807191636377_pinsWorkingAgain.Designer.cs">
-      <DependentUpon>201807191636377_pinsWorkingAgain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807200914346_datatable.cs" />
-    <Compile Include="Migrations\201807200914346_datatable.Designer.cs">
-      <DependentUpon>201807200914346_datatable.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Model2.cs" />
+    <Compile Include="Model3.cs" />
     <Compile Include="Point.cs" />
+    <Compile Include="SmallPin.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -92,19 +103,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MasterModel.cs" />
-    <Compile Include="Migrations\201807181108490_FirstMigration.cs" />
-    <Compile Include="Migrations\201807181108490_FirstMigration.Designer.cs">
-      <DependentUpon>201807181108490_FirstMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807181254468_aa.cs" />
-    <Compile Include="Migrations\201807181254468_aa.Designer.cs">
-      <DependentUpon>201807181254468_aa.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807181257572_bb.cs" />
-    <Compile Include="Migrations\201807181257572_bb.Designer.cs">
-      <DependentUpon>201807181257572_bb.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model1.cs" />
     <Compile Include="Pin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -120,23 +118,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201807181108490_FirstMigration.resx">
-      <DependentUpon>201807181108490_FirstMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807181254468_aa.resx">
-      <DependentUpon>201807181254468_aa.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807181257572_bb.resx">
-      <DependentUpon>201807181257572_bb.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807191548150_pinsWorking.resx">
-      <DependentUpon>201807191548150_pinsWorking.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807191636377_pinsWorkingAgain.resx">
-      <DependentUpon>201807191636377_pinsWorkingAgain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807200914346_datatable.resx">
-      <DependentUpon>201807200914346_datatable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201807240737497_myFirstOnModel3.resx">
+      <DependentUpon>201807240737497_myFirstOnModel3.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -149,7 +132,30 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MasterMind.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="MasterMind_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>MasterMind.mdf</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

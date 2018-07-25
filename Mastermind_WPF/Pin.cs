@@ -17,15 +17,22 @@ namespace Mastermind_WPF
         public string Color { get; set; }
         public int YPos { get; set; }
         public int XPos { get; set; }
-
-        public bool PlayerPin { get; set; }
-        
-
-        
-
-      
+        public DateTime Time { get; set; }
 
 
-        
+
+
+        Ellipse dd = new Ellipse();
+
+        public void ff()
+        {
+            Color = dd.Fill.ToString();
+            XPos = Convert.ToInt32(dd.GetValue(Canvas.LeftProperty));
+        }
+
+
+
+
+
     }
 }

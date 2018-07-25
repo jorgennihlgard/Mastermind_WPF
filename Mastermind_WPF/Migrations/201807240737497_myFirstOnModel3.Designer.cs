@@ -7,13 +7,13 @@ namespace Mastermind_WPF.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class FirstMigration : IMigrationMetadata
+    public sealed partial class myFirstOnModel3 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(FirstMigration));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(myFirstOnModel3));
         
         string IMigrationMetadata.Id
         {
-            get { return "201807181108490_FirstMigration"; }
+            get { return "201807240737497_myFirstOnModel3"; }
         }
         
         string IMigrationMetadata.Source

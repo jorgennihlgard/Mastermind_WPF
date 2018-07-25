@@ -3,7 +3,7 @@ namespace Mastermind_WPF.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class aa : DbMigration
+    public partial class myFirstOnModel3 : DbMigration
     {
         public override void Up()
         {
@@ -12,18 +12,21 @@ namespace Mastermind_WPF.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Row = c.Int(nullable: false),
+                        Pin_Id = c.Int(),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Pins", t => t.Pin_Id)
+                .Index(t => t.Pin_Id);
             
             CreateTable(
-                "dbo.Colors",
+                "dbo.Pins",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Red = c.String(),
-                        Green = c.String(),
-                        Blue = c.String(),
+                        Color = c.String(),
+                        YPos = c.Int(nullable: false),
+                        XPos = c.Int(nullable: false),
+                        Time = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -31,7 +34,9 @@ namespace Mastermind_WPF.Migrations
         
         public override void Down()
         {
-            DropTable("dbo.Colors");
+            DropForeignKey("dbo.Boards", "Pin_Id", "dbo.Pins");
+            DropIndex("dbo.Boards", new[] { "Pin_Id" });
+            DropTable("dbo.Pins");
             DropTable("dbo.Boards");
         }
     }

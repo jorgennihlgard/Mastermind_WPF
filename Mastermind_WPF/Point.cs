@@ -15,7 +15,13 @@ namespace Mastermind_WPF
         private static int _xPosition = 130;
        
         private static int _xPositionCodePin = 130;
-       // private static int _row = 1;
+
+        private static int _yPositionSmallPin = 383;
+        private static int _xPositionSmallPin = 295;
+        
+
+
+        // private static int _row = 1;
 
 
 
@@ -52,6 +58,85 @@ namespace Mastermind_WPF
         {
             return _xPositionCodePin += 30;
         }
+
+        public static int GetXPositionSmallPin(int pinCount)
+        {
+            if(pinCount == 1 || pinCount == 3)
+            {
+                _xPositionSmallPin = 295;
+            }
+            else
+            {
+                _xPositionSmallPin = 305;
+                
+            }
+            
+            return _xPositionSmallPin;
+        }
+
+        public static int GetYPositionSmallPin(int pinCount)
+        {
+            if (pinCount == 1 || pinCount == 2)
+            {
+                _yPositionSmallPin = _yPosition + 13;
+            }
+            else
+            {
+                _yPositionSmallPin = _yPosition + 3;
+                
+            }
+
+            return _yPositionSmallPin;
+        }
+
+
+        public static void CalculateYSmallPin()
+        {
+
+
+            
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public static int GetYPositi()
+        {
+
+            if (_xPositionSmallPin > 295)
+            {
+                _yPositionSmallPin = _yPosition + 3;
+
+            }
+            else
+            {
+                _yPositionSmallPin = _yPosition + 13;
+                //_xPositionSmallPin = 295;
+            }
+
+            if (_xPositionSmallPin <= 295)
+            {
+                _xPositionSmallPin += 10;
+            }
+            else
+            {
+                _xPositionSmallPin = 295;
+                
+            }
+
+
+            return _yPositionSmallPin;
+        }
+
 
     }
 }
