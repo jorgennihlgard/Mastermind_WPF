@@ -11,7 +11,6 @@ namespace Mastermind_WPF
             : base("name=Model3")
         {
         }
-        public DbSet<Board> Boards { get; set; }
         public DbSet<Pin> Pins { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

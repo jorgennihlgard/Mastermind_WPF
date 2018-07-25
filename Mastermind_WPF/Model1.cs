@@ -15,7 +15,6 @@ namespace Mastermind_WPF
         {
         }
 
-        public DbSet<Board> Boards { get; set; }
         public DbSet<Pin> Pins { get; set; }
      
      

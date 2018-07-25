@@ -82,6 +82,18 @@
     <Compile Include="Migrations\201807240737497_myFirstOnModel3.Designer.cs">
       <DependentUpon>201807240737497_myFirstOnModel3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807250734026_boardedit.cs" />
+    <Compile Include="Migrations\201807250734026_boardedit.Designer.cs">
+      <DependentUpon>201807250734026_boardedit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807250737587_DeleteBoard.cs" />
+    <Compile Include="Migrations\201807250737587_DeleteBoard.Designer.cs">
+      <DependentUpon>201807250737587_DeleteBoard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807250747577_TimeChange.cs" />
+    <Compile Include="Migrations\201807250747577_TimeChange.Designer.cs">
+      <DependentUpon>201807250747577_TimeChange.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model2.cs" />
     <Compile Include="Model3.cs" />
@@ -95,7 +107,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Board.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -120,6 +131,15 @@
     </Compile>
     <EmbeddedResource Include="Migrations\201807240737497_myFirstOnModel3.resx">
       <DependentUpon>201807240737497_myFirstOnModel3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807250734026_boardedit.resx">
+      <DependentUpon>201807250734026_boardedit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807250737587_DeleteBoard.resx">
+      <DependentUpon>201807250737587_DeleteBoard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807250747577_TimeChange.resx">
+      <DependentUpon>201807250747577_TimeChange.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

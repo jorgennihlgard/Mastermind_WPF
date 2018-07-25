@@ -11,7 +11,7 @@ namespace Mastermind_WPF
             : base("name=MasterCon")
         {
         }
-        public DbSet<Board> Boards { get; set; }
+        
         public DbSet<Pin> Pins { get; set; }
 
 

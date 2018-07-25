@@ -15,48 +15,71 @@ namespace Mastermind_WPF
         public string Color { get; set; }
         public int YPos { get; set; }
         public int XPos { get; set; }
-        
+
 
 
         public static List<Ellipse> CalculateSmallPins(List<Ellipse> GuessPins, List<Ellipse> CodePins)
         {
             List<Ellipse> SmallPins = new List<Ellipse>();
             int smallPinNumber = 0;
-            string lastColor ="";
+           var ColorGuessArray = GuessPins.Select(g => g.Fill).ToArray();
+           var ColorCodeArray = CodePins.Select(c => c.Fill).ToArray();
+           
+            for (int i = 0; i < 4; i++)
+            {
+                if (GuessPins[i].Fill.ToString() == CodePins[i].Fill.ToString())
+                {
+                    Ellipse blackWhitePin1 = new Ellipse();
+                    smallPinNumber++;
+                    blackWhitePin1.Fill = new SolidColorBrush(Colors.Black);
+                    Ellipse newPin = DrawSmallPin(blackWhitePin1, smallPinNumber);
+                    SmallPins.Add(newPin);
+                    GuessPins[i].Fill = new SolidColorBrush(Colors.AliceBlue);
+                    CodePins[i].Fill = new SolidColorBrush(Colors.AntiqueWhite);
+                }
+            }
+
             foreach (var correctPin in CodePins)
             {
                 foreach (var pinGuess in GuessPins)
                 {
+
                     if (correctPin.Fill.ToString() == pinGuess.Fill.ToString())
                     {
                         Ellipse blackWhitePin = new Ellipse();
                         smallPinNumber++;
 
-                        if (correctPin.GetValue(Canvas.LeftProperty).ToString() == pinGuess.GetValue(Canvas.LeftProperty).ToString() && pinGuess.Fill.ToString() != )
-                        {
-                            blackWhitePin.Fill = new SolidColorBrush(Colors.Black);
-                            lastColor = correctPin.Fill.ToString();
-                        }
-                        else
-                        {
-                            blackWhitePin.Fill = new SolidColorBrush(Colors.White);
-                        }
-
-                        blackWhitePin.Width = 7;
-                        blackWhitePin.Height = 7;
-                        int y = Point.GetYPositionSmallPin(smallPinNumber);
-                        Canvas.SetTop(blackWhitePin, y);
-                        int x = Point.GetXPositionSmallPin(smallPinNumber);
-                        Canvas.SetLeft(blackWhitePin, x);
-                        SmallPins.Add(blackWhitePin);
+                        blackWhitePin.Fill = new SolidColorBrush(Colors.White);
+                       Ellipse newPin = DrawSmallPin(blackWhitePin,smallPinNumber);
+                        pinGuess.Fill = new SolidColorBrush(Colors.Azure);
+                        correctPin.Fill = new SolidColorBrush(Colors.Beige);
+                        SmallPins.Add(newPin);
                     }
 
-                   
 
+                    
                 }
+            }
+
+            for (int i = 0; i < 4; i++)
+            {
+                GuessPins[i].Fill = ColorGuessArray[i];
+                CodePins[i].Fill = ColorCodeArray[i];
             }
             GuessPins.Clear();
             return SmallPins;
+        }
+
+        private static Ellipse DrawSmallPin(Ellipse blackWhite, int smallPinNumber)
+        {
+            blackWhite.Width = 7;
+            blackWhite.Height = 7;
+            int y = Point.GetYPositionSmallPin(smallPinNumber);
+            Canvas.SetTop(blackWhite, y);
+            int x = Point.GetXPositionSmallPin(smallPinNumber);
+            Canvas.SetLeft(blackWhite, x);
+
+            return blackWhite;
         }
 
     }

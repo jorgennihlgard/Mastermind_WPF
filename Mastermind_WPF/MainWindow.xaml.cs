@@ -29,7 +29,7 @@ namespace Mastermind_WPF
 
         string[] correctColour = new string[4];
         static int pinCount = 0;
-        Model1 db = new Model1();
+        Model3 db = new Model3();
         static readonly Random Random = new Random();
         public MainWindow()
         {
@@ -45,7 +45,7 @@ namespace Mastermind_WPF
 
                 correctColour[i] = pin.Fill.ToString();
                 CodePins.Add(pin);
-
+                pin.Visibility = Visibility.Hidden;
                 //AddTableRows(circle, pin);
                 MyCanvas.Children.Add(pin);
 
@@ -72,6 +72,9 @@ namespace Mastermind_WPF
             //MyCanvas.Children.Add(pin);
             //GuessPins.Add(pin);
             checkNumberPinsInRow(pin);
+            Pin pi = new Pin();
+            pi.Color = pin.Fill.ToString();
+            //SaveNow(pi);
         }
 
         private void BluePick_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -92,21 +95,7 @@ namespace Mastermind_WPF
 
         }
 
-        public void checkNumberPinsInRow(Ellipse pin)
-        {
-            MyCanvas.Children.Add(pin);
-            GuessPins.Add(pin);
-            if (pinCount % 4 == 0)
-            {
-                List<Ellipse> smallPins = SmallPin.CalculateSmallPins(GuessPins, CodePins);
-                foreach (var item in smallPins)
-                {
-                    MyCanvas.Children.Add(item);
-                }
-
-            }
-            
-        }
+        
 
         private void PinkPick_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -153,6 +142,66 @@ namespace Mastermind_WPF
             pin.Fill = pinColor;
             return pin;
         }
+
+        public void checkNumberPinsInRow(Ellipse pin)
+        {
+            MyCanvas.Children.Add(pin);
+            GuessPins.Add(pin);
+            if (pinCount % 4 == 0)
+            {
+                List<Ellipse> smallPins = SmallPin.CalculateSmallPins(GuessPins, CodePins);
+                int countBlack = 0;
+                Message();
+                foreach (var item in smallPins)
+                {
+
+                    if (item.Fill.ToString() == "#FF000000")
+                    {
+                        countBlack++;
+                        if (countBlack == 4)
+                        {
+                            foreach (var item2 in CodePins)
+                            {
+                                item2.Visibility = Visibility.Visible;
+                            }
+                            MessageBox.Show("Grattis, du är dagens vinnare");
+                            
+                        }
+                    }
+                    MyCanvas.Children.Add(item);
+                    
+                    
+                }
+
+            }
+
+        }
+
+        public static void Message()
+        {
+            // Configure the message box to be displayed
+            string messageBoxText = "Vill du spela igen?";
+            string caption = "Mastermind";
+            MessageBoxButton button = MessageBoxButton.YesNoCancel;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+
+           MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                    Application.Current.Shutdown();
+                    break;
+                case MessageBoxResult.No:
+                    Application.Current.Shutdown();
+                    break;
+                case MessageBoxResult.Cancel:
+                    MessageBox.Show("Njut av segern..");
+                    break;
+            }
+        }
+
 
 
         public static string GetRandomColor()
@@ -239,6 +288,24 @@ namespace Mastermind_WPF
             //    db.SaveChanges();
         }
 
+        public void SaveNow(Pin pin)
+        {
+            db.Pins.Add(pin);
+            db.SaveChanges();
+        }
+
+//        using (var context = new MyContext())
+//{
+//    try
+//    {
+//        foreach(var row in accounts){
+//            context.AddToAccounts(row);
+//        }
+//context.SaveChanges();
+//    }catch (Exception ex){
+//        //Log any exception here.
+//    }     
+//}
     }
 }
 
