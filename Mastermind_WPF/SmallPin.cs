@@ -10,11 +10,13 @@ using System.Windows;
 
 namespace Mastermind_WPF
 {
-    class SmallPin
+   public class SmallPin
     {
-        public string Color { get; set; }
-        public int YPos { get; set; }
-        public int XPos { get; set; }
+        public int Id { get; set; }
+        public PinColor Color { get; set; }
+        public Row Row { get; set; }
+
+
 
 
 

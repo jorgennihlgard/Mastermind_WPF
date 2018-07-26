@@ -97,7 +97,9 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model2.cs" />
     <Compile Include="Model3.cs" />
+    <Compile Include="PinColor.cs" />
     <Compile Include="Point.cs" />
+    <Compile Include="Row.cs" />
     <Compile Include="SmallPin.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

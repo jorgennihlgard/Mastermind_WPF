@@ -25,7 +25,7 @@ namespace Mastermind_WPF
         private Pin pinne = null;
         List<Ellipse> CodePins = new List<Ellipse>();
         List<Ellipse> GuessPins = new List<Ellipse>();
-        
+        static int rowNumber = 0;
 
         string[] correctColour = new string[4];
         static int pinCount = 0;
@@ -36,7 +36,6 @@ namespace Mastermind_WPF
 
             InitializeComponent();
 
-            //DataSet circle = MakeDataTable();
             Ellipse pin = null;
 
             for (int i = 0; i < 4; i++)
@@ -46,12 +45,11 @@ namespace Mastermind_WPF
                 correctColour[i] = pin.Fill.ToString();
                 CodePins.Add(pin);
                 pin.Visibility = Visibility.Hidden;
-                //AddTableRows(circle, pin);
                 MyCanvas.Children.Add(pin);
 
             }
 
-            //Save(circle);
+          
 
         }
 
@@ -60,8 +58,6 @@ namespace Mastermind_WPF
 
             Ellipse pin = CreatePin();
             pin.Fill = new SolidColorBrush(Colors.Red);
-            //MyCanvas.Children.Add(pin);
-            //GuessPins.Add(pin);
             checkNumberPinsInRow(pin);
         }
 
@@ -69,20 +65,17 @@ namespace Mastermind_WPF
         {
             Ellipse pin = CreatePin();
             pin.Fill = new SolidColorBrush(Colors.Green);
-            //MyCanvas.Children.Add(pin);
-            //GuessPins.Add(pin);
+           
             checkNumberPinsInRow(pin);
-            Pin pi = new Pin();
-            pi.Color = pin.Fill.ToString();
-            //SaveNow(pi);
+            
+           
         }
 
         private void BluePick_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Ellipse pin = CreatePin();
             pin.Fill = new SolidColorBrush(Colors.Blue);
-            //MyCanvas.Children.Add(pin);
-            //GuessPins.Add(pin);
+           
             checkNumberPinsInRow(pin);
         }
 
@@ -95,14 +88,11 @@ namespace Mastermind_WPF
 
         }
 
-        
-
         private void PinkPick_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Ellipse pin = CreatePin();
             pin.Fill = new SolidColorBrush(Colors.HotPink);
-            //MyCanvas.Children.Add(pin);
-            //GuessPins.Add(pin);
+           
             checkNumberPinsInRow(pin);
         }
 
@@ -110,8 +100,7 @@ namespace Mastermind_WPF
         {
             Ellipse pin = CreatePin();
             pin.Fill = new SolidColorBrush(Colors.Aquamarine);
-            //MyCanvas.Children.Add(pin);
-            //GuessPins.Add(pin);
+           
             checkNumberPinsInRow(pin);
             
         }
@@ -149,9 +138,10 @@ namespace Mastermind_WPF
             GuessPins.Add(pin);
             if (pinCount % 4 == 0)
             {
+                rowNumber++;
                 List<Ellipse> smallPins = SmallPin.CalculateSmallPins(GuessPins, CodePins);
                 int countBlack = 0;
-                Message();
+               
                 foreach (var item in smallPins)
                 {
 
@@ -164,12 +154,14 @@ namespace Mastermind_WPF
                             {
                                 item2.Visibility = Visibility.Visible;
                             }
-                            MessageBox.Show("Grattis, du är dagens vinnare");
-                            
+                           
                         }
                     }
                     MyCanvas.Children.Add(item);
-                    
+                    if (rowNumber == 10 || countBlack == 4)
+                    {
+                        Message();
+                    }
                     
                 }
 
@@ -179,8 +171,16 @@ namespace Mastermind_WPF
 
         public static void Message()
         {
+            string messageBoxText = "";
             // Configure the message box to be displayed
-            string messageBoxText = "Vill du spela igen?";
+            if (rowNumber == 10)
+            {
+                messageBoxText = "Vi får bryta här, spela igen?";
+            }
+            else
+            {
+                messageBoxText = "Winning!!! Vill du spela igen?";
+            }
             string caption = "Mastermind";
             MessageBoxButton button = MessageBoxButton.YesNoCancel;
             MessageBoxImage icon = MessageBoxImage.Warning;
@@ -217,48 +217,14 @@ namespace Mastermind_WPF
 
         }
 
-        public static void CorrectRow()
+         public void SaveNow(Pin pin)
         {
-
+            db.Pins.Add(pin);
+            db.SaveChanges();
         }
 
-        public static DataSet MakeDataTable()
-        {
-            DataSet game = new DataSet("MyGameTables");
-            DataTable circle = game.Tables.Add("MyPins");
-            DataTable peg = game.Tables.Add("MyPegs");
-
-            circle.Columns.Add("Id", typeof(int));
-            circle.Columns.Add("Color", typeof(string));
-            circle.Columns.Add("YPos");
-            circle.Columns.Add("XPos");
-            peg.Columns.Add("Id", typeof(int));
-            peg.Columns.Add("aa", typeof(string));
-            peg.Columns.Add("bbb");
-            peg.Columns.Add("cccc");
-
-            return game;
-
-
-        }
-
-        public static void AddTableRows(DataSet cir, Ellipse pin)
-        {
-
-            DataRow row = cir.Tables[0].NewRow();
-            DataRow pegrow = cir.Tables[1].NewRow();
-            row["Id"] = 1;
-            row["Color"] = pin.Fill;
-            row["YPos"] = pin.GetValue(Canvas.TopProperty);
-            row["XPos"] = pin.GetValue(Canvas.LeftProperty);
-            pegrow["Id"] = 1;
-            pegrow["aa"] = pin.Fill;
-            pegrow["bbb"] = pin.GetValue(Canvas.TopProperty);
-            pegrow["cccc"] = pin.GetValue(Canvas.LeftProperty);
-
-            cir.Tables[0].Rows.Add(row);
-            cir.Tables[1].Rows.Add(pegrow);
-
+    }
+}
 
 
             // Pin newPin = new Pin();
@@ -274,10 +240,10 @@ namespace Mastermind_WPF
 
 
 
-        }
+        
 
-        public void Save(DataSet pin)
-        {
+        //public void Save(DataSet pin)
+        //{
             //    foreach (DataColumn dd in pin.Tables["0"].Columns)
             //    {
             //        dd.
@@ -286,13 +252,9 @@ namespace Mastermind_WPF
             //    pinss.Color = pin.Tables["0"];
             //    db.Pins.Add(pin.Tables["0"]);       //HÄR ÄR JAG........................
             //    db.SaveChanges();
-        }
+        //}
 
-        public void SaveNow(Pin pin)
-        {
-            db.Pins.Add(pin);
-            db.SaveChanges();
-        }
+       
 
 //        using (var context = new MyContext())
 //{
@@ -306,8 +268,46 @@ namespace Mastermind_WPF
 //        //Log any exception here.
 //    }     
 //}
-    }
-}
+
+
+//public static DataSet MakeDataTable()
+//{
+//    DataSet game = new DataSet("MyGameTables");
+//    DataTable circle = game.Tables.Add("MyPins");
+//    DataTable peg = game.Tables.Add("MyPegs");
+
+//    circle.Columns.Add("Id", typeof(int));
+//    circle.Columns.Add("Color", typeof(string));
+//    circle.Columns.Add("YPos");
+//    circle.Columns.Add("XPos");
+//    peg.Columns.Add("Id", typeof(int));
+//    peg.Columns.Add("aa", typeof(string));
+//    peg.Columns.Add("bbb");
+//    peg.Columns.Add("cccc");
+
+//    return game;
+
+
+//}
+
+//public static void AddTableRows(DataSet cir, Ellipse pin)
+//{
+
+//    DataRow row = cir.Tables[0].NewRow();
+//    DataRow pegrow = cir.Tables[1].NewRow();
+//    row["Id"] = 1;
+//    row["Color"] = pin.Fill;
+//    row["YPos"] = pin.GetValue(Canvas.TopProperty);
+//    row["XPos"] = pin.GetValue(Canvas.LeftProperty);
+//    pegrow["Id"] = 1;
+//    pegrow["aa"] = pin.Fill;
+//    pegrow["bbb"] = pin.GetValue(Canvas.TopProperty);
+//    pegrow["cccc"] = pin.GetValue(Canvas.LeftProperty);
+
+//    cir.Tables[0].Rows.Add(row);
+//    cir.Tables[1].Rows.Add(pegrow);
+//}
+
 
 
 

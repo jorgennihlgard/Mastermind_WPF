@@ -14,32 +14,8 @@ namespace Mastermind_WPF
     {
         [Key]
         public int Id { get; set; }
-        public string Color { get; set; }
-        public int YPos { get; set; }
-        public int XPos { get; set; }
-        public DateTime Time { get; set; }
-       
-
-
-        public Pin()
-        {
-            Color = "#FF0000FF";
-            XPos = 345;
-            YPos = 322;
-            Time = DateTime.Now;
-        }
-
-        Ellipse dd = new Ellipse();
-       
-        public void ff()
-        {
-            Color = dd.Fill.ToString();
-            XPos = Convert.ToInt32(dd.GetValue(Canvas.LeftProperty));
-           
-        }
-
-
-
+        public PinColor PinColor { get; set; }
+        public Row Row { get; set; }
 
 
     }

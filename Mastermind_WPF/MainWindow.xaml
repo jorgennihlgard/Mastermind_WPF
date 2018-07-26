@@ -15,6 +15,8 @@
         <Ellipse Canvas.Top="150" Canvas.Left="20" Width="30" Height="30" Name="YellowPick" Fill="Yellow" MouseLeftButtonDown="YellowPick_MouseLeftButtonDown"/>
         <Ellipse Canvas.Top="190" Canvas.Left="20" Width="30" Height="30" Name="PinkPick" Fill="HotPink" MouseLeftButtonDown="PinkPick_MouseLeftButtonDown"/>
         <Ellipse Canvas.Top="230" Canvas.Left="20" Width="30" Height="30" Name="AquamarinePick" Fill="Aquamarine" MouseLeftButtonDown="AquamarinePick_MouseLeftButtonDown"/>
+        
+        
         <!--<Ellipse Canvas.Top="383" Canvas.Left="305" Width="7" Height="7" Name="AquamarinePic" Fill="Aquamarine" MouseLeftButtonDown="AquamarinePick_MouseLeftButtonDown"/>
         <Ellipse Canvas.Top="383" Canvas.Left="295" Width="7" Height="7" Name="AquamarinePi" Fill="Aquamarine" MouseLeftButtonDown="AquamarinePick_MouseLeftButtonDown"/>
         <Ellipse Canvas.Top="373" Canvas.Left="305" Width="7" Height="7" Name="AquamarineP" Fill="Aquamarine" MouseLeftButtonDown="AquamarinePick_MouseLeftButtonDown"/>
